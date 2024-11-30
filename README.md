@@ -1,10 +1,16 @@
+# HackerRank Solutions 
+This repository contains my solutions to HackerRank problems. Below, you can find a list of solved problems along with brief explanations. 
+
+## List of Questions
+1. [Annotations](https://www.hackerrank.com/challenges/java-annotations/problem)
+2. [Java Visitor Pattern](https://www.hackerrank.com/challenges/java-vistor-pattern/problem)
+
 # LeetCode Solutions 
 
 This repository contains solutions to algorithmic problems I have solved on the LeetCode platform. For each problem, there is 
 a file that includes its solution and, if necessary, explanations. It's important to note that the solutions provided for each 
 problem may not represent the most optimized or fastest solutions. These solutions are entirely my own, reflecting my approach 
 to solving the given problems.
-
 
 ### List of Questions
 
