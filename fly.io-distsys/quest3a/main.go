@@ -55,18 +55,6 @@ func main() {
 			return err
 		}
 		m["type"] = "topology_ok"
-		topology := m["topology"].(map[string]any)
-		c.Lock()
-		for host, values := range topology {
-			if valList, ok := values.([]any); ok {
-				for _, value := range valList {
-					if v, ok := value.(string); ok {
-						edges[host] = append(edges[host], v)
-					}
-				}
-			}
-		}
-		c.Unlock()
 		delete(m, "topology")
 		return node.Reply(msg, m)
 	})
