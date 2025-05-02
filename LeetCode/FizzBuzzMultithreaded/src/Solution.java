@@ -1,3 +1,5 @@
+import java.util.function.IntConsumer;
+
 class FizzBuzz {
     private int n;
     private int num;
