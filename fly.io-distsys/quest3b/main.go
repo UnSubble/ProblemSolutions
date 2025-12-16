@@ -24,12 +24,12 @@ func main() {
 
 		rw.Lock()
 		messages[message] = true
-		rw.Unlock()
 
 		messagesCopy := make([]any, 0)
 		for message := range messages {
 			messagesCopy = append(messagesCopy, message)
 		}
+		rw.Unlock()
 
 		rom := map[string]any{"type": "register", "messages": messagesCopy}
 
@@ -64,39 +64,6 @@ func main() {
 	})
 
 	node.Handle("topology", func(msg maelstrom.Message) error {
-		var m map[string]any
-		if err := json.Unmarshal(msg.Body, &m); err != nil {
-			return err
-		}
-
-		topology, ok := m["topology"].(map[string]any)
-		if !ok {
-			return fmt.Errorf("invalid topology format")
-		}
-
-		newNodeIDs := []string{}
-		for id, values := range topology {
-			valList, ok := values.([]any)
-			if !ok {
-				return fmt.Errorf("invalid value list for node %s", id)
-			}
-			if node.ID() == id {
-				for _, value := range valList {
-					v, ok := value.(string)
-					if !ok {
-						return fmt.Errorf("invalid node ID in topology")
-					}
-					newNodeIDs = append(newNodeIDs, v)
-				}
-			} else {
-				toSend := map[string]any{"type": "topology", "topology": map[string]any{id: valList}}
-				node.Send(id, toSend)
-			}
-		}
-		rw.Lock()
-		node.Init(node.ID(), newNodeIDs)
-		rw.Unlock()
-
 		return node.Reply(msg, map[string]any{"type": "topology_ok"})
 	})
 
